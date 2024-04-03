@@ -1,0 +1,20 @@
+{
+    "AWSTemplateFormatVersion" : "2010-09-09",
+    "Description"              : "Example of checkov issue",
+    "Resources"                : {
+        "LambdaExecutePermission"            : {
+            "Condition" : "EnableBackups",
+            "Type"      : "AWS::Lambda::Permission",
+            "Properties" : {
+                "Action" : "lambda:InvokeFunction",
+                "FunctionName" : {
+                    "Fn::GetAtt" : [
+                        "EnableShapshot",
+                        "Arn"
+                    ]
+                },
+                "Principal"    : "*"
+            }
+        },
+    }
+}
